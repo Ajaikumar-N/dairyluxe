@@ -10,24 +10,26 @@ import "../cssFiles/sideBar.css";
 const HomePage = () => {
   const navigate = useNavigate();
   const [selectedFeature, setSelectedFeature] = useState(null);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState("");
 
   useEffect(() => {
     const userDetails = JSON.parse(localStorage.getItem("loggedIn-dairy-user"));
     if (userDetails) {
+      console.log("User Details:", userDetails);
       setUserData(userDetails);
     }
   }, []);
 
-  const farmer = () => {
-    setSelectedFeature("farmer");
-  };
-
-  const customer = () => {
-    setSelectedFeature("customer");
-  };
+  useEffect(() => {
+    if (userData && userData["userType"] === "Farmer") {
+      setSelectedFeature("farmer");
+    } else {
+      setSelectedFeature("customer");
+    }
+  }, [userData]);
 
   const logout = () => {
+    localStorage.removeItem("loggedIn-dairy-user");
     navigate("/");
   };
 
@@ -53,10 +55,6 @@ const HomePage = () => {
       </header>
       <div className="Component-Container">
         <aside className="sidebar">
-          <h2>Go to</h2>
-          <Button type="" value="farmer" onClick={farmer} />
-          <Button type="" value="customer" onClick={customer} />
-
           {userData && (
             <div>
               <p>Email: {userData.email}</p>

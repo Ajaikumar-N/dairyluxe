@@ -24,6 +24,7 @@ const Login = ({ onChange }) => {
         name: user.name,
         number: user.number,
         email: user.email,
+        userType: user.userType,
       };
       
       localStorage.setItem(

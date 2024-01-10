@@ -31,6 +31,7 @@ const SignUp = ({ onChange }) => {
       number: number,
       password: password,
       userType: userType,
+      is_deleted: 0,
       createdDate: new Date().toISOString().slice(0, 10),
     };
 
