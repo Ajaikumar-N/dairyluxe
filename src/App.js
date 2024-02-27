@@ -11,6 +11,8 @@ import SignUp from "./authenticationFiles/signup.jsx";
 import Login from "./authenticationFiles/login.jsx";
 import FarmerPage from "./jsxFiles/FarmerPage.jsx";
 import CustomerPage from "./jsxFiles/CustomerPage.jsx";
+import AdminPage from "./jsxFiles/AdminPage.jsx";
+import EmployeePage from "./jsxFiles/EmployeePage.jsx";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/farmer" element={<FarmerPage />} />
           <Route path="/customer" element={<CustomerPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/employee" element={<EmployeePage />} />
         </Routes>
       </Router>
     </div>

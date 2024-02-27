@@ -10,6 +10,7 @@ const SignUp = ({ onChange }) => {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
   const [userType, setUserType] = useState("");
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,6 +31,7 @@ const SignUp = ({ onChange }) => {
       email: email,
       number: number,
       password: password,
+      address: address,
       userType: userType,
       is_deleted: 0,
       createdDate: new Date().toISOString().slice(0, 10),
@@ -120,6 +122,12 @@ const SignUp = ({ onChange }) => {
           inputType="password"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <Input
+          className="input-field"
+          labelName="Address"
+          inputType="text"
+          onChange={(e) => setAddress(e.target.value)}
+        />
         <InputWithSelect
           className="input-field"
           labelName="Role"
@@ -129,6 +137,9 @@ const SignUp = ({ onChange }) => {
           options={[
             { value: "Customer", label: "Customer" },
             { value: "Farmer", label: "Farmer" },
+            { value: "Admin", label: "Admin" },
+            { value: "Employee", label: "Employee" },
+
           ]}
         />
         <Button className="submit-button" type="submit" value="Register Now" />

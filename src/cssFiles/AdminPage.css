@@ -1,0 +1,32 @@
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.user-table th,
+.user-table td {
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: left;
+}
+
+.user-type-farmer td {
+    background-color: #e8f8e9;
+    /* Light green for farmers */
+}
+
+.user-type-customer td {
+    background-color: #d6e9f9;
+    /* Light blue for customers */
+}
+
+.user-type-admin td {
+    background-color: #f9e1e3;
+    /* Light red for admins */
+}
+
+.user-type-employee td {
+    background-color: #faf0ce;
+    /* Light yellow for employees */
+}

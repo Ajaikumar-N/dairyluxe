@@ -4,6 +4,8 @@ import img from "../images/blackCowLogo.png";
 import { Button } from "../elementFiles/Button";
 import FarmerPage from "./FarmerPage";
 import CustomerPage from "./CustomerPage";
+import AdminPage from "./AdminPage";
+import EmployeePage from "./EmployeePage";
 import { Image } from "../elementFiles/Image";
 import "../cssFiles/sideBar.css";
 
@@ -23,8 +25,12 @@ const HomePage = () => {
   useEffect(() => {
     if (userData && userData["userType"] === "Farmer") {
       setSelectedFeature("farmer");
-    } else {
+    } else if (userData && userData["userType"] === "Customer") {
       setSelectedFeature("customer");
+    } else if (userData && userData["userType"] === "Admin") {
+      setSelectedFeature("Admin");
+    } else if (userData && userData["userType"] === "Employee") {
+      setSelectedFeature("Employee");
     }
   }, [userData]);
 
@@ -33,12 +39,24 @@ const HomePage = () => {
     navigate("/");
   };
 
+  const buyerPage = () => {
+    setSelectedFeature("customer");
+  };
+
+  const farmerPage = () => {
+    setSelectedFeature("farmer");
+  };
+
   const renderSelectedComponent = () => {
     switch (selectedFeature) {
       case "farmer":
         return <FarmerPage />;
       case "customer":
         return <CustomerPage />;
+      case "Admin":
+        return <AdminPage />;
+      case "Employee":
+        return <EmployeePage />;
       default:
         return null;
     }
@@ -54,14 +72,24 @@ const HomePage = () => {
         </div>
       </header>
       <div className="Component-Container">
-        <aside className="sidebar">
-          {userData && (
+        {userData && (
+          <aside className="sidebar">
             <div>
+              {userData.userType === "Farmer" && (
+                <div>
+                  {selectedFeature === "farmer" ? (
+                    <Button type="" value="Buy Products" onClick={buyerPage} />
+                  ) : (
+                    <Button type="" value="Go to Home" onClick={farmerPage} />
+                  )}
+                </div>
+              )}
+
               <p>Email: {userData.email}</p>
               <p>Number: {userData.number}</p>
             </div>
-          )}
-        </aside>
+          </aside>
+        )}
 
         <div className="main">{renderSelectedComponent()}</div>
       </div>
