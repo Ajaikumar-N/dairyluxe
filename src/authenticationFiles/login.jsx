@@ -16,7 +16,9 @@ const Login = ({ onChange }) => {
 
     const existingUsers = JSON.parse(localStorage.getItem("dairy-users")) || [];
 
-    const user = existingUsers.find((user) => user.email === loginEmail);
+    const user = existingUsers.find(
+      (user) => user.email === loginEmail
+    );
 
     if (user && user.password === loginPassword) {
       const loggedInUserDetails = {
@@ -25,17 +27,16 @@ const Login = ({ onChange }) => {
         number: user.number,
         email: user.email,
         userType: user.userType,
+        address: user.address,
       };
-      
+
       localStorage.setItem(
         "loggedIn-dairy-user",
         JSON.stringify(loggedInUserDetails)
       );
-      console.log("Login successful!");
       navigate("/homepage");
     } else {
       setErrorMessage("Invalid credentials. Please try again.");
-      console.log("Login failed. Invalid credentials.");
     }
   };
 

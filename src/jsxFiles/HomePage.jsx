@@ -12,39 +12,44 @@ import "../cssFiles/sideBar.css";
 const HomePage = () => {
   const navigate = useNavigate();
   const [selectedFeature, setSelectedFeature] = useState(null);
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState(null);
+
+  const existingUsers = JSON.parse(localStorage.getItem("dairy-users"));
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedIn-dairy-user"));
 
   useEffect(() => {
-    const userDetails = JSON.parse(localStorage.getItem("loggedIn-dairy-user"));
-    if (userDetails) {
-      console.log("User Details:", userDetails);
-      setUserData(userDetails);
+    if (loggedInUser && existingUsers) {
+      const userDetails = existingUsers.find(
+        (user) => user.email === loggedInUser.email
+      );
+      if (userDetails) {
+        setUserData(userDetails);
+      }
     }
   }, []);
 
   useEffect(() => {
-    if (userData && userData["userType"] === "Farmer") {
-      setSelectedFeature("farmer");
-    } else if (userData && userData["userType"] === "Customer") {
-      setSelectedFeature("customer");
-    } else if (userData && userData["userType"] === "Admin") {
-      setSelectedFeature("Admin");
-    } else if (userData && userData["userType"] === "Employee") {
-      setSelectedFeature("Employee");
+    if (userData) {
+      const featureMap = {
+        Farmer: "farmer",
+        Customer: "customer",
+        Admin: "Admin",
+        Employee: "Employee",
+      };
+      const feature = featureMap[userData.userType] || null;
+      if (feature !== selectedFeature) {
+        setSelectedFeature(feature);
+      }
     }
-  }, [userData]);
+  }, [userData, selectedFeature]);
+
+  const login = () => {
+    navigate("/login");
+  };
 
   const logout = () => {
     localStorage.removeItem("loggedIn-dairy-user");
     navigate("/");
-  };
-
-  const buyerPage = () => {
-    setSelectedFeature("customer");
-  };
-
-  const farmerPage = () => {
-    setSelectedFeature("farmer");
   };
 
   const renderSelectedComponent = () => {
@@ -65,32 +70,52 @@ const HomePage = () => {
   return (
     <>
       <header className="header">
-        <Image src={img} alt="alt" width="8%"></Image>
+        <Image src={img} alt="alt" width="8%" />
         {userData && <h2>Welcome to Dairyluxe, {userData.name}!</h2>}
         <div className="header-button">
-          <Button type="" value="Logout" onClick={logout} />
+          {loggedInUser ? (
+            <Button type="" value="Logout" onClick={logout} />
+          ) : (
+            <Button type="" value="LogIn" onClick={login} />
+          )}
         </div>
       </header>
       <div className="Component-Container">
         {userData && (
           <aside className="sidebar">
-            <div>
-              {userData.userType === "Farmer" && (
-                <div>
-                  {selectedFeature === "farmer" ? (
-                    <Button type="" value="Buy Products" onClick={buyerPage} />
-                  ) : (
-                    <Button type="" value="Go to Home" onClick={farmerPage} />
-                  )}
-                </div>
-              )}
-
-              <p>Email: {userData.email}</p>
-              <p>Number: {userData.number}</p>
-            </div>
+            {selectedFeature === "farmer" ? (
+              <>
+                <Button
+                  type=""
+                  value="Buy Products"
+                  onClick={() => selectedFeature !== "customer" && setSelectedFeature("customer")}
+                />
+                <Button
+                  type=""
+                  value="History"
+                  onClick={() => selectedFeature !== "customer" && setSelectedFeature("customer")}
+                />
+              </>
+            ) : (
+              <>
+                <Button
+                  type=""
+                  value="Go to Home"
+                  onClick={() => selectedFeature !== "farmer" && setSelectedFeature("farmer")}
+                />
+                <Button
+                  type=""
+                  value="History"
+                  onClick={() => selectedFeature !== "farmer" && setSelectedFeature("farmer")}
+                />
+              </>
+            )}
+            <p>Name: {userData.name}</p>
+            <p>Email: {userData.email}</p>
+            <p>Number: {userData.number}</p>
+            <p>Address: {userData.address}</p>
           </aside>
         )}
-
         <div className="main">{renderSelectedComponent()}</div>
       </div>
     </>

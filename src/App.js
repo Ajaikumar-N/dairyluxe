@@ -13,6 +13,7 @@ import FarmerPage from "./jsxFiles/FarmerPage.jsx";
 import CustomerPage from "./jsxFiles/CustomerPage.jsx";
 import AdminPage from "./jsxFiles/AdminPage.jsx";
 import EmployeePage from "./jsxFiles/EmployeePage.jsx";
+import TableCanvas from "./jsxFiles/practice files/TableCanvas.jsx";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/customer" element={<CustomerPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/employee" element={<EmployeePage />} />
+          <Route path="/tableCanvas" element={<TableCanvas />} />
         </Routes>
       </Router>
     </div>

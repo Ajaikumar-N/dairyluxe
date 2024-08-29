@@ -30,3 +30,43 @@
     background-color: #faf0ce;
     /* Light yellow for employees */
 }
+
+/* For table cells with order-id-1 */
+.order-id-1 td,
+.order-id-CH-01 td {
+    background-color: #faf0ce;
+}
+
+/* For table cells with order-id-2 */
+.order-id-2 td,
+.order-id-CH-02 td {
+    background-color: #e0f7fa;
+}
+
+/* For table cells with order-id-3 */
+.order-id-3 td,
+.order-id-CP-01 td {
+    background-color: #ffccbc;
+    /* Change the color code as needed */
+}
+
+/* For table cells with order-id-4 */
+.order-id-4 td,
+.order-id-GH-01 td {
+    background-color: #e6ee9c;
+    /* Change the color code as needed */
+}
+
+/* For table cells with order-id-5 */
+.order-id-5 td,
+.order-id-DP-01 td {
+    background-color: #c8e6c9;
+    /* Change the color code as needed */
+}
+
+/* For table cells with order-id-6 */
+.order-id-6 td,
+.order-id-FP-01 td {
+    background-color: #f8bbd0;
+    /* Change the color code as needed */
+}

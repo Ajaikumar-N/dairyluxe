@@ -57,7 +57,6 @@ const SignUp = ({ onChange }) => {
       localStorage.setItem("dairy-users", JSON.stringify(existingUsers));
       setRegistrationSuccess(true);
       setErrorMessage("");
-      console.log("User Registered:", newUser);
       navigate("/login");
     } catch (error) {
       setErrorMessage("Registration failed. Please try again.");
